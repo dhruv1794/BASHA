@@ -51,3 +51,11 @@ button{
   padding-top: 15px;
   padding-bottom: 15px;
 }
+.success-button{
+  background: #28a745 !important;
+  border-color: #28a745;
+}
+.danger-button{
+  background:#dc3545 !important;
+  border-color: #dc3545;
+}

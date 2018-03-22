@@ -10,7 +10,7 @@ class App extends Component {
    this.state = {
      ArrayOfQuestions:[
        "Winter is coming","Holocaust is near","World is a mysterious place","i love lemonade","Chennai is hot and humid", "Bangalore is pleasant",
-       "Vladmir Putin is the richest politician","Can virat overtake sachin ?", "Survival of the fittest","Hitler lost world war 2"
+       "Vladmir Putin is the richest politician","Can virat overtake sachin ?", "Survival of the fittest","Hitler lost world war 2", "Hire me"
      ],
      AnswerGrid:[],
      QuestionGrid:[],
@@ -20,15 +20,49 @@ class App extends Component {
  HandleJumbledGridClicks(ClickedWord){
    console.log(ClickedWord,'$$$')
    var AnswerGrid = this.state.AnswerGrid;
+   var QuestionGrid = this.state.QuestionGrid;
    AnswerGrid.push(ClickedWord)
    this.setState({AnswerGrid});
- }
- JumbledGrid(){
+   var found = QuestionGrid.indexOf(ClickedWord);
+   while (found !== -1) {
+   QuestionGrid.splice(found, 1);
+   found = QuestionGrid.indexOf(ClickedWord);
+   if(QuestionGrid.length === 0){
+     
+   }
+}
+}
+nextQuestion(){
+   var currentQuestion = this.state.currentQuestion + 1;
+   this.setState({AnswerGrid:[]})
+   this.setState({currentQuestion})
+}
+refreshPage(){
+  //location.reload();
+  this.setState({AnswerGrid:[]})
+}
+JumbledGrid(){
+var words = [];
+
+  if(this.state.QuestionGrid.length){
+    ;
+  }
+  else if(this.state.AnswerGrid.length === this.state.ArrayOfQuestions[this.state.currentQuestion].split(' ').length){
+    var AnswerGrid = this.state.AnswerGrid.toString();
+    var CheckingString = this.state.ArrayOfQuestions[this.state.currentQuestion].split(' ').toString();
+    if(AnswerGrid === CheckingString){
+      return <Button style={{background:'green !important', width:'100%'}} className='success-button' onClick={()=>this.nextQuestion()}>Correct</Button>
+    }else{
+      return <Button style={{background:'red !important', width:'100%'}} className='danger-button' onClick={()=>this.refreshPage()}>Incorrect</Button>
+    }
+  }
+  else{
+    words = this.state.ArrayOfQuestions[this.state.currentQuestion].split(' ');
+   this.setState({QuestionGrid:words})
+  }
    
-   var words = [];
-   words = this.state.ArrayOfQuestions[this.state.currentQuestion].split(' ');
-   var QuestionGrid = words.map((i,index)=>{
-     return <Button key='index' onClick={()=>this.HandleJumbledGridClicks(i)}>{i}</Button>
+   var QuestionGrid = this.state.QuestionGrid.map((i,index)=>{
+     return <Button  onClick={()=>this.HandleJumbledGridClicks(i)}>{i}</Button>
    })
    return this.Shuffle(QuestionGrid)
  }
