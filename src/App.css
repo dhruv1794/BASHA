@@ -26,3 +26,28 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.game-area{
+  position: relative;
+  top: 150px;
+}
+.game-header{
+  font-weight: 600;
+  font-size: 18px;
+  text-transform: uppercase
+
+}
+.card-text{
+  text-align:left;
+}
+.card-footer{
+  text-align: left;
+}
+button{
+  margin-left:10px;
+  background: black !important
+}
+.create-height{
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
